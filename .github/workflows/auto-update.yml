@@ -1,9 +1,9 @@
 name: Auto Update Progress
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: "* * * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -12,20 +12,20 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Update file
+      - name: Update progress file
         run: |
           echo "Last update (UTC): $(date -u)" > progress.md
 
-      - name: Commit and push
+      - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           git add progress.md
           git diff --cached --quiet && echo "No changes" && exit 0
-          
-          git commit -m "chore: auto update"
+
+          git commit -m "chore: auto update progress"
           git push
