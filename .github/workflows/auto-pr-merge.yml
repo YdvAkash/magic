@@ -2,7 +2,7 @@ name: Auto Commit -> PR -> Merge
 
 on:
   schedule:
-    - cron: "0 18 * * *"   # daily 6PM UTC
+    - cron: "*/59 * * * *"   # daily 6PM UTC
   workflow_dispatch:
 
 permissions:
